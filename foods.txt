@@ -1,0 +1,118 @@
+CREATE TABLE Food_Items(
+id INT NOT NULL,
+food_name VARCHAR(30) NOT NULL,   
+quantity int NOT null,
+price int not null,
+who_is_cooking VARCHAR(20), 
+primary key(id)
+);
+
+INSERT INTO Food_Items (id,food_name, quantity, price,who_is_cooking)
+VALUES  (1,'Hummus',40,120,'Mr.AbA' ),
+        (2,'Manakeesh',26,130,'Mr.Cdc' ),
+        (3,'Grilled_halloumi',32,140,'Mr.Efe'),
+        (4,'Foul_meddamas',50,110,'Mr.Ghg' ),
+        (5,'Falafel',31,150,'Mr.Iji' ),
+        (6,'Polenta',56, 120,'Mr.Klk' ),
+	(7,'Lasagna',48, 130,'Mr.Mnm' ),
+	(8,'Ravioli',38, 140,'Mr.Opo' ),
+	(9,'Osso_buco',74, 150,'Mr.Qrq' ),
+	(10,'Arancini',47, 160,'Mr.Sts' ) , 
+	(11,'Ribollita',20, 170,'Mr.Uvu' ), 
+	(12,'Spaghetti',15, 180,'Mr.Wxw' ),
+	(13,'Chicken',23, 180,'Mr.Yzy' );  
+-------------------------------------------------------------
+CREATE TABLE Chefs(
+id INT NOT NULL,
+cook_name VARCHAR(10) NOT NULL,
+designation VARCHAR(20) NOT NULL, 
+salary int NOT null, 
+primary KEY(id),
+FOREIGN KEY(cook_name) REFERENCES Food_Items(who_is_cooking)
+);
+
+INSERT INTO Chefs (id,cook_name, designation, salary)
+VALUES  (101, 'Mr.AbA' ,'Chefs',10000),
+	(102, 'Mr.Cdc' ,'Chefs',10000),
+	(103, 'Mr.Efe' ,'Chefs',10000),
+	(104, 'Mr.Ghg' ,'Chefs',10000),
+	(105, 'Mr.Iji' ,'Chefs',10000),
+	(106, 'Mr.Klk' ,'Chefs',10000),
+	(107, 'Mr.Mnm' ,'Chefs',10000),
+	(108, 'Mr.Opo' ,'Chefs',10000),
+	(109, 'Mr.Qrq' ,'Chefs',10000),
+	(110, 'Mr.Sts' ,'Chefs',10000),
+	(111, 'Mr.Uvu' ,'Chefs',10000),
+	(112, 'Mr.Wxw' ,'Chefs',10000),
+	(113, 'Mr.Yzy' ,'Head-Chefs',15000 );
+---------------------------------------------------------
+CREATE TABLE waiters(
+id INT NOT NULL,
+name VARCHAR(10) NOT NULL,
+designation VARCHAR(20) NOT NULL, 
+salary int NOT null, 
+working_on_table VARCHAR(2) NOT NULL,  
+primary key(id)
+);
+
+INSERT INTO waiters (id,name, designation, salary, working_on_table)
+VALUES  (14,'Mr.Ab','waiters',10000,'A'),
+	(15,'Mr.Cd','waiters',10000,'B'),
+	(16,'Mr.Ef','waiters',10000,'C'),
+	(17,'Mr.Gh','waiters',10000,'D'),
+	(18,'Mr.Ij','waiters',10000,'E'),
+	
+	(19,'Mr.Kl','waiters',12000,'F'),
+	(20,'Mr.Mn','waiters',12000,'G'),
+	(21,'Mr.Op','waiters',12000,'H'),
+	(22,'Mr.Qr','waiters',12000,'I'),
+	(23,'Mr.St','waiters',12000,'J'),
+	
+	(24,'Mr.Uv','waiters',10000,'K'),
+	(25,'Mr.Wx','waiters',10000,'L'),
+	(26,'Mr.Yz','waiters',10000,'M');
+------------------------------------------------------------
+CREATE TABLE Tables_Of_Restaurant(
+id INT NOT NULL,
+Nmber_of_Sits INT NOT NULL,
+Table_identity VARCHAR(5) NOT NULL,
+primary key(id),
+FOREIGN KEY(Table_identity) REFERENCES waiters(working_on_table)
+);
+INSERT INTO Tables_Of_Restaurant(id, Nmber_of_Sits, Table_identity)
+VALUES  (1000, 4,'A'),
+	(1001, 4,'B'),
+	(1002, 4,'C'),
+	(1003, 4,'D'),
+	(1004, 4,'E'),
+
+        (1005, 6,'F'),
+	(1006, 6,'G'),
+	(1007, 6,'H'),
+	(1008, 6,'I'),
+	(1009, 6,'J'),
+
+        (1010, 8,'K'),
+	(1011, 8,'L'),
+	(1012, 8,'M');
+        
+------------------------------------------------------------
+CREATE TABLE management(
+id INT NOT NULL,
+name VARCHAR(10) NOT NULL,
+designation VARCHAR(20) NOT NULL, 
+salary int NOT null,  
+primary key(id)
+);
+INSERT INTO management (id,name, designation, salary)
+VALUES  (202,'Mr.sla','Receptionist',12000),
+        (203,'Mr.qla','Receptionist',12000),
+        (204,'Mr.Vqa','Manager',32000),
+	(205,'Mr.QQa','Assistant-manager',25000),
+	(206,'Mr.ZeeQ','Assistant-manager',25000);
+
+------------------------------------------------------------
+
+SELECT * from Food_Items
+join Chefs on Food_Items.who_is_cooking = Chefs.cook_name;
+
